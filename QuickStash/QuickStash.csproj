@@ -16,7 +16,7 @@
     <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
   </ItemGroup>
 
-<!-- Temporary since Wetstone is not published yet -->
+  <!-- Temporary since Wetstone is not published yet -->
   <ItemGroup>
     <ProjectReference Include="..\..\Wetstone\Wetstone.csproj" />
   </ItemGroup>

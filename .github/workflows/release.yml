@@ -6,9 +6,9 @@ on:
       - "v*.*.*"
 
 env:
-  SOLUTION_PATH: QuickStash.sln
-  PACKAGE_PATH: package
-  ZIP_PATH: package/QuickStash.zip
+  SOLUTION_PATH: QuickStash/QuickStash.sln
+  PACKAGE_PATH: QuickStash/package
+  ZIP_PATH: QuickStash/package/QuickStash.zip
 
 jobs:
   build:
@@ -19,6 +19,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        path: ./QuickStash
+
+    - name: Checkout Wetstone
+      uses: actions/checkout@v3
+      with:
+        path: ./Wetstone
+        repository: iZastic/Wetstone
 
     - name: Install .NET
       uses: actions/setup-dotnet@v3
