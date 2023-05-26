@@ -1,15 +1,14 @@
 ﻿using HarmonyLib;
 using ProjectM;
 
-namespace vrising_stash
+namespace QuickStash
 {
     [HarmonyPatch]
     public class GameplayInputSystem_Patch
     {
-
-        [HarmonyPatch(typeof(GameplayInputSystem), nameof(GameplayInputSystem.HandleInput))]
         [HarmonyPostfix]
-        static void HandleInput(GameplayInputSystem __instance, InputState inputState)
+        [HarmonyPatch(typeof(GameplayInputSystem), nameof(GameplayInputSystem.HandleInput))]
+        private static void HandleInput(GameplayInputSystem __instance)
         {
             QuickStashClient.HandleInput(__instance);
         }

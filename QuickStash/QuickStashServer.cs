@@ -1,17 +1,14 @@
-﻿using Gameplay.Systems;
-using ProjectM;
-using ProjectM.Gameplay.Scripting;
+﻿using ProjectM;
 using ProjectM.Network;
 using ProjectM.Scripting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
 using Wetstone.API;
 
-namespace vrising_stash
+namespace QuickStash
 {
     public class QuickStashServer
     {
@@ -42,13 +39,13 @@ namespace vrising_stash
                 return;
             }
 
-            var gameManager = VWorld.Server.GetExistingSystem<ServerScriptMapper>()?._ServerGameManager;
+            var gameManager = VWorld.Server.GetExistingSystem<ServerScriptMapper>()._ServerGameManager;
             var gameDataSystem = VWorld.Server.GetExistingSystem<GameDataSystem>();
 
             var entities = QuickStashShared.GetStashEntities(VWorld.Server.EntityManager);
             foreach (var toEntity in entities)
             {
-                if (!gameManager._TeamChecker.IsAllies(fromCharacter.Character, toEntity))
+                if (!gameManager!.IsAllies(fromCharacter.Character, toEntity))
                 {
                     continue;
                 }

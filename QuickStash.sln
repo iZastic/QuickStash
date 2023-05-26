@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32317.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vrising_stash", "vrising_stash\vrising_stash.csproj", "{F64065A6-E326-44D0-A6B4-BB0A0A851F76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickStash", "QuickStash\QuickStash.csproj", "{F64065A6-E326-44D0-A6B4-BB0A0A851F76}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wetstone", "..\Wetstone\Wetstone.csproj", "{34ECAE54-C703-4F81-B0A0-8191D434A3EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F64065A6-E326-44D0-A6B4-BB0A0A851F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F64065A6-E326-44D0-A6B4-BB0A0A851F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F64065A6-E326-44D0-A6B4-BB0A0A851F76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34ECAE54-C703-4F81-B0A0-8191D434A3EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34ECAE54-C703-4F81-B0A0-8191D434A3EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34ECAE54-C703-4F81-B0A0-8191D434A3EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34ECAE54-C703-4F81-B0A0-8191D434A3EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

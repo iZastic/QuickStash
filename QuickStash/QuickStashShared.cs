@@ -1,11 +1,11 @@
-﻿using ProjectM;
+﻿using Il2CppInterop.Runtime;
+using ProjectM;
 using ProjectM.CastleBuilding;
 using System.Linq;
-using UnhollowerRuntimeLib;
 using Unity.Collections;
 using Unity.Entities;
 
-namespace vrising_stash
+namespace QuickStash
 {
     public class QuickStashShared
     {
