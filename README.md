@@ -35,10 +35,13 @@ For server configuration, after running the game once, the config file will be g
 - Ask in the [V Rising Mod Community](https://discord.gg/CWzkHvekg3) Discord
 
 ### Changelog
-`1.3.0`
-- Upgrade for Gloomrot
+`1.3.1`
+- Added support for bags
 
 <details>
+
+`1.3.0`
+- Upgrade for Gloomrot
 
 `1.2.3`
 - Upgrade to Wetstone 1.1.0

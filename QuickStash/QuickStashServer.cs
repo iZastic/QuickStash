@@ -3,6 +3,7 @@ using ProjectM.Network;
 using ProjectM.Scripting;
 using System;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
@@ -32,31 +33,37 @@ namespace QuickStash
             }
             _lastMerge[fromCharacter.Character] = DateTime.Now;
 
-            InventoryUtilities.TryGetInventoryEntity(VWorld.Server.EntityManager, fromCharacter.Character, out Entity playerInventory);
+            var inventoryEntities = new NativeList<Entity>(Allocator.Temp);
+            InventoryUtilities.TryGetInventoryEntities(VWorld.Server.EntityManager, fromCharacter.Character, ref inventoryEntities);
 
-            if (playerInventory == Entity.Null)
+            if (inventoryEntities.Length == 0)
             {
+                inventoryEntities.Dispose();
                 return;
             }
 
             var gameManager = VWorld.Server.GetExistingSystem<ServerScriptMapper>()._ServerGameManager;
             var gameDataSystem = VWorld.Server.GetExistingSystem<GameDataSystem>();
 
-            var entities = QuickStashShared.GetStashEntities(VWorld.Server.EntityManager);
-            foreach (var toEntity in entities)
+            var stashEntities = QuickStashShared.GetStashEntities(VWorld.Server.EntityManager);
+            foreach (var stashEntity in stashEntities)
             {
-                if (!gameManager!.IsAllies(fromCharacter.Character, toEntity))
+                if (!gameManager!.IsAllies(fromCharacter.Character, stashEntity))
                 {
                     continue;
                 }
 
-                if (!IsWithinDistance(playerInventory, toEntity, VWorld.Server.EntityManager))
+                if (!IsWithinDistance(fromCharacter.Character, stashEntity, VWorld.Server.EntityManager))
                 {
                     continue;
                 }
 
-                InventoryUtilitiesServer.TrySmartMergeInventories(VWorld.Server.EntityManager, gameDataSystem.ItemHashLookupMap, playerInventory, toEntity, out _);
+                foreach (var inventoryEntity in inventoryEntities)
+                {
+                    InventoryUtilitiesServer.TrySmartMergeInventories(VWorld.Server.EntityManager, gameDataSystem.ItemHashLookupMap, inventoryEntity, stashEntity, out _);
+                }
             }
+            inventoryEntities.Dispose();
 
             // Refresh silver debuff
             foreach (var prefabGuid in _itemRefreshGuids)
