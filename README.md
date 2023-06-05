@@ -6,21 +6,17 @@ Default key is G.
 Note this is both a client and server mod.
 
 ### Installation
-
-Required
-
-- Install [BepInEx](https://v-rising.thunderstore.io/package/BepInEx/BepInExPack_V_Rising/)
-- Install [Wetstone](https://v-rising.thunderstore.io/package/molenzwiebel/Wetstone/)
+- Install [BepInEx](https://github.com/decaprime/VRising-Modding/releases/tag/1.668.4)
+- Install [Bloodstone](https://github.com/decaprime/Bloodstone/releases/tag/v0.1.3)
 - Extract _QuickStash.dll_ into _(VRising folder)/BepInEx/plugins_
 - Extract _QuickStash.dll_ into _(VRising folder)/VRising_Server/BepInEx/plugins_
 
-Optional
-
-- for singleplayer, install [ServerLaunchFix](https://v-rising.thunderstore.io/package/Mythic/ServerLaunchFix/) to fix issues with the server mod not working
+#### Optional
+Singleplayer requires [ServerLaunchFix](https://v-rising.thunderstore.io/package/Mythic/ServerLaunchFix/) to fix issues with the server mods not working.
 
 ### Configuration
 
-The keybindings are changed in the menu in-game.
+The keybinding can be changed in the menu in-game.
 
 For server configuration, after running the game once, the config file will be generated.
 
@@ -28,17 +24,24 @@ For server configuration, after running the game once, the config file will be g
 
 ### Troubleshooting
 
-- If the mod doesn't work, it is probably because the server part is not installed, check your BepInEx logs on both the client and server to make sure you are running the latest version of both QuickStash and Wetstone.
+- If the mod doesn't work, it may be because it is not installed on the server. Check your BepInEx logs on both the client and server to make sure the latest version of both QuickStash and Bloodstone where loaded.
 
 ### Support
-- Open an [issue](https://github.com/Elmegaard/QuickStash/issues) on [github](https://github.com/Elmegaard/QuickStash)
-- Ask in the [V Rising Mod Community](https://discord.gg/CWzkHvekg3) Discord
+- Open an issue on [github](https://github.com/iZastic/QuickStash/issues)
+- Ask in the V Rising Mod Community [discord](https://vrisingmods.com/discord)
+
+### Contributors
+- iZastic: `@iZastic#0365` on Discord
+- Elmegaard: `Elmegaard#4316` on Discord
 
 ### Changelog
-`1.3.1`
-- Added support for bags
+`1.3.2`
+- Moved from Wetstone to Bloodstone
 
 <details>
+
+`1.3.1`
+- Added support for bags
 
 `1.3.0`
 - Upgrade for Gloomrot

@@ -5,12 +5,12 @@ using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 using System.Reflection;
 using UnityEngine;
-using Wetstone.API;
+using Bloodstone.API;
 
 namespace QuickStash
 {
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
-    [BepInDependency("xyz.molenzwiebel.wetstone")]
+    [BepInDependency("gg.deca.Bloodstone")]
     [Reloadable]
     public class Plugin : BasePlugin
     {

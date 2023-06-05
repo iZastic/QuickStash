@@ -14,7 +14,7 @@
     "description": "$(PluginDescription)",
     "dependencies": [
         "BepInEx-BepInExPack_V_Rising-1.0.0",
-        "molenzwiebel-Wetstone-1.1.0"
+        "gg.deca.Bloodstone-0.1.3"
     ]
 }
      ]]>
