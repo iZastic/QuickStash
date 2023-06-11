@@ -1,13 +1,13 @@
 # QuickStash
 
-A mod that uses _Compulsively Count_ on all nearby stashes with 1 click.  
+A fork of the original QuickStash which uses _Compulsively Count_ on all nearby stashes with 1 click.  
 Default key is G.
 
 Note this is both a client and server mod.
 
 ### Installation
-- Install [BepInEx](https://github.com/decaprime/VRising-Modding/releases/tag/1.668.4)
-- Install [Bloodstone](https://github.com/decaprime/Bloodstone/releases/tag/v0.1.3)
+- Install [BepInEx](https://v-rising.thunderstore.io/package/BepInEx/BepInExPack_V_Rising)
+- Install [Bloodstone](https://v-rising.thunderstore.io/package/deca/Bloodstone)
 - Extract _QuickStash.dll_ into _(VRising folder)/BepInEx/plugins_
 - Extract _QuickStash.dll_ into _(VRising folder)/VRising_Server/BepInEx/plugins_
 
@@ -16,7 +16,7 @@ Singleplayer requires [ServerLaunchFix](https://v-rising.thunderstore.io/package
 
 ### Configuration
 
-The keybinding can be changed in the menu in-game.
+The keybinding can be changed in the in-game controls menu.
 
 For server configuration, after running the game once, the config file will be generated.
 

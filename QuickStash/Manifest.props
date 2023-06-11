@@ -13,8 +13,8 @@
     "website_url": "$(PluginURL)",
     "description": "$(PluginDescription)",
     "dependencies": [
-        "BepInEx-BepInExPack_V_Rising-1.0.0",
-        "gg.deca.Bloodstone-0.1.3"
+        "BepInEx-BepInExPack_V_Rising-1.668.5",
+        "deca-Bloodstone-0.1.4"
     ]
 }
      ]]>
