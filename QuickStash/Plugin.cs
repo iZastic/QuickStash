@@ -6,11 +6,13 @@ using HarmonyLib;
 using System.Reflection;
 using UnityEngine;
 using Bloodstone.API;
+using VampireCommandFramework;
 
 namespace QuickStash
 {
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
     [BepInDependency("gg.deca.Bloodstone")]
+    [BepInDependency("gg.deca.VampireCommandFramework")]
     [Reloadable]
     public class Plugin : BasePlugin
     {
@@ -51,6 +53,7 @@ namespace QuickStash
         {
             Logger = Log;
             InitConfig();
+            CommandRegistry.RegisterAll();
             QuickStashClient.Reset();
 
             _hooks = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
