@@ -1,16 +1,16 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using BepInEx.IL2CPP;
 using BepInEx.Logging;
+using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 using System.Reflection;
 using UnityEngine;
-using Wetstone.API;
+using Bloodstone.API;
 
-namespace vrising_stash
+namespace QuickStash
 {
-    [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-    [BepInDependency("xyz.molenzwiebel.wetstone")]
+    [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
+    [BepInDependency("gg.deca.Bloodstone")]
     [Reloadable]
     public class Plugin : BasePlugin
     {
@@ -56,7 +56,7 @@ namespace vrising_stash
             _hooks = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
             RegisterMessages();
 
-            Log.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+            Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
         }
 
         public override bool Unload()

@@ -1,12 +1,9 @@
 ﻿using ProjectM;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.Entities;
 using UnityEngine;
-using Wetstone.API;
+using Bloodstone.API;
 
-namespace vrising_stash
+namespace QuickStash
 {
     public class QuickStashClient
     {
@@ -33,9 +30,7 @@ namespace vrising_stash
 
         private static void TransferItems()
         {
-            VNetwork.SendToServerStruct<MergeInventoriesMessage>(new()
-            {
-            });
+            VNetwork.SendToServerStruct<MergeInventoriesMessage>(new() { });
         }
     }
 }
