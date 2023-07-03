@@ -1,15 +1,15 @@
-﻿using ProjectM;
-using ProjectM.CastleBuilding;
+﻿using Gameplay.Systems;
+using ProjectM;
+using ProjectM.Gameplay.Scripting;
 using ProjectM.Network;
 using ProjectM.Scripting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
-using VampireCommandFramework;
+using Wetstone.API;
 
 namespace vrising_stash
 {
@@ -20,44 +20,52 @@ namespace vrising_stash
             new PrefabGUID(-949672483)  // Silver Coin
         };
 
-        [Command("stash", "s", description:"Automatically compulsively count on ALL stashes in range")]
-        public static void OnMergeInventoriesMessage(ChatCommandContext ctx)
+        private static readonly Dictionary<Entity, DateTime> _lastMerge = new();
+
+        public static void OnMergeInventoriesMessage(FromCharacter fromCharacter, MergeInventoriesMessage msg)
         {
-            InventoryUtilities.TryGetInventoryEntity(Plugin.Server.EntityManager, ctx.Event.SenderUserEntity, out Entity playerInventory);
+            if (!VWorld.IsServer || fromCharacter.Character == Entity.Null)
+            {
+                return;
+            }
+
+            if (_lastMerge.ContainsKey(fromCharacter.Character) && DateTime.Now - _lastMerge[fromCharacter.Character] < TimeSpan.FromSeconds(0.5))
+            {
+                return;
+            }
+            _lastMerge[fromCharacter.Character] = DateTime.Now;
+
+            InventoryUtilities.TryGetInventoryEntity(VWorld.Server.EntityManager, fromCharacter.Character, out Entity playerInventory);
+
             if (playerInventory == Entity.Null)
             {
                 return;
             }
 
-            var gameManager = Plugin.Server.GetExistingSystem<ServerScriptMapper>()?._ServerGameManager;
-            var gameDataSystem = Plugin.Server.GetExistingSystem<GameDataSystem>();
+            var gameManager = VWorld.Server.GetExistingSystem<ServerScriptMapper>()?._ServerGameManager;
+            var gameDataSystem = VWorld.Server.GetExistingSystem<GameDataSystem>();
 
-            var entities = GetStashEntities(Plugin.Server.EntityManager);
+            var entities = QuickStashShared.GetStashEntities(VWorld.Server.EntityManager);
             foreach (var toEntity in entities)
             {
-                if (!IsAllies(ctx.Event.SenderUserEntity, toEntity)){
-                    continue;
-                }
-
-                if (!IsWithinDistance(playerInventory, toEntity, Plugin.Server.EntityManager))
+                if (!gameManager._TeamChecker.IsAllies(fromCharacter.Character, toEntity))
                 {
                     continue;
                 }
 
-                InventoryUtilitiesServer.TrySmartMergeInventories(Plugin.Server.EntityManager, gameDataSystem.ItemHashLookupMap, playerInventory, toEntity, out _);
+                if (!IsWithinDistance(playerInventory, toEntity, VWorld.Server.EntityManager))
+                {
+                    continue;
+                }
+
+                InventoryUtilitiesServer.TrySmartMergeInventories(VWorld.Server.EntityManager, gameDataSystem.ItemHashLookupMap, playerInventory, toEntity, out _);
             }
 
             // Refresh silver debuff
             foreach (var prefabGuid in _itemRefreshGuids)
             {
-                InventoryUtilitiesServer.CreateInventoryChangedEvent(Plugin.Server.EntityManager, ctx.Event.SenderUserEntity, prefabGuid, 0, InventoryChangedEventType.Moved);
+                InventoryUtilitiesServer.CreateInventoryChangedEvent(VWorld.Server.EntityManager, fromCharacter.Character, prefabGuid, 0, InventoryChangedEventType.Moved);
             }
-        }
-
-        public static bool IsAllies(Entity a, Entity b)
-        {
-            //There is definately an actual way, but i dont know how yet with the team checker gone.
-            return true;
         }
 
         private static bool IsWithinDistance(Entity interactor, Entity inventory, EntityManager entityManager)
@@ -81,37 +89,6 @@ namespace vrising_stash
             }
 
             return true;
-        }
-
-
-        private static ComponentType[] _containerComponents = null;
-        private static ComponentType[] ContainerComponents
-        {
-            get
-            {
-                if (_containerComponents == null)
-                {
-                    _containerComponents = new[] {
-
-                        ComponentType.ReadOnly<Team>(),
-                        ComponentType.ReadOnly<CastleHeartConnection>(),
-                        ComponentType.ReadOnly < InventoryBuffer >(),
-                        ComponentType.ReadOnly < NameableInteractable >(),
-                    };
-                }
-                return _containerComponents;
-            }
-        }
-
-        public static NativeArray<Entity> GetStashEntities(EntityManager entityManager)
-        {
-            var query = entityManager.CreateEntityQuery(ContainerComponents);
-            return query.ToEntityArray(Allocator.Temp);
-        }
-
-        public static bool IsEntityStash(EntityManager entityManager, Entity entity)
-        {
-            return !ContainerComponents.Any(x => !entityManager.HasComponent(entity, x));
         }
     }
 }
