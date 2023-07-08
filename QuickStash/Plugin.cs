@@ -6,17 +6,17 @@ using HarmonyLib;
 using System.Reflection;
 using UnityEngine;
 using Bloodstone.API;
-using VampireCommandFramework;
 
 namespace QuickStash
 {
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
     [BepInDependency("gg.deca.Bloodstone")]
-    [BepInDependency("gg.deca.VampireCommandFramework")]
+    [BepInDependency("gg.deca.VampireCommandFramework", BepInDependency.DependencyFlags.SoftDependency)]
     [Reloadable]
     public class Plugin : BasePlugin
     {
         public static ManualLogSource Logger;
+        public static bool VCF;
 
         public static Keybinding configKeybinding;
         public static ConfigEntry<float> configMaxDistance;
@@ -52,8 +52,11 @@ namespace QuickStash
         public override void Load()
         {
             Logger = Log;
+            VCF = IL2CPPChainloader.Instance.Plugins.ContainsKey("gg.deca.VampireCommandFramework");
+            Logger.LogInfo($"***** VCF : {VCF}");
+
             InitConfig();
-            CommandRegistry.RegisterAll();
+            if (VCFWrapper.Enabled) VCFWrapper.RegisterAll();
             QuickStashClient.Reset();
 
             _hooks = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());

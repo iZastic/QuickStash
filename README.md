@@ -1,14 +1,29 @@
 # QuickStash
 
-A fork of the original QuickStash which uses _Compulsively Count_ on all nearby stashes with 1 click.  
-Default key is G.
+A fork of the original QuickStash which uses _Compulsively Count_ on all nearby stashes.
 
-Note this is both a client and server mod.
+QuickStash can be installed using multiple methods depending on your needs. See installation methods below.
 
-### Installation
+### Client and Server Installation (Default)
+The default installation which requires the mod to be installed on the client and server. Uses the default keybind `G` to stash items.
 - Install [BepInEx](https://v-rising.thunderstore.io/package/BepInEx/BepInExPack_V_Rising)
 - Install [Bloodstone](https://v-rising.thunderstore.io/package/deca/Bloodstone)
 - Extract _QuickStash.dll_ into _(VRising folder)/BepInEx/plugins_
+- Extract _QuickStash.dll_ into _(VRising folder)/VRising_Server/BepInEx/plugins_
+
+### Client and Server Installation using VampireCommandFramework (Optional)
+Optional installation which requires the mod to be installed on the client and server. Uses the default keybind `G` or the `.stash` command to stash items.
+- Install [BepInEx](https://v-rising.thunderstore.io/package/BepInEx/BepInExPack_V_Rising)
+- Install [Bloodstone](https://v-rising.thunderstore.io/package/deca/Bloodstone)
+- Install [VampireCommandFramework](https://v-rising.thunderstore.io/package/deca/VampireCommandFramework/)
+- Extract _QuickStash.dll_ into _(VRising folder)/BepInEx/plugins_
+- Extract _QuickStash.dll_ into _(VRising folder)/VRising_Server/BepInEx/plugins_
+
+### Server Only Installation using VampireCommandFramework (Optional)
+Optional installation which is **server side only**. Uses the `.stash` command to stash items.
+- Install [BepInEx](https://v-rising.thunderstore.io/package/BepInEx/BepInExPack_V_Rising) on the server
+- Install [Bloodstone](https://v-rising.thunderstore.io/package/deca/Bloodstone) on the server
+- Install [VampireCommandFramework](https://v-rising.thunderstore.io/package/deca/VampireCommandFramework/) on the server
 - Extract _QuickStash.dll_ into _(VRising folder)/VRising_Server/BepInEx/plugins_
 
 #### Optional
@@ -31,14 +46,18 @@ For server configuration, after running the game once, the config file will be g
 - Ask in the V Rising Mod Community [discord](https://vrisingmods.com/discord)
 
 ### Contributors
-- iZastic: `@iZastic#0365` on Discord
-- Elmegaard: `Elmegaard#4316` on Discord
+- iZastic: `@iZastic` on Discord
+- Elmegaard: `Elmegaard#` on Discord
+- Dresmyr: `@小爛土` on Discord
 
 ### Changelog
-`1.3.2`
-- Moved from Wetstone to Bloodstone
+`1.3.3`
+- Added support for optional VCF command
 
 <details>
+
+`1.3.2`
+- Moved from Wetstone to Bloodstone
 
 `1.3.1`
 - Added support for bags

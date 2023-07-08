@@ -401,3 +401,6 @@ dump/*
 build/*
 zip/*
 *.zip
+
+# Custom
+package/
